@@ -19,8 +19,11 @@ keyboard = Window.get_keyboard()
 player = Sprite("boy.png", 8)
 player_x = 20
 player_y = 50
-player_flag_move_down = True
-player_flag_move_up = True
+player_color = "RED"
+
+player_flag_down = True
+player_flag_up = True
+player_flag_space = True
 #[END] Criando variaveis de jogo
 #endregion
 
@@ -36,29 +39,51 @@ def on_create():
 ###A Funcao player_move e a responsavel pela movimentacao do personagem.
 ############
 def player_move():
-    global player_x, player_y, player_flag_move_up, player_flag_move_down
+    global player_x, player_y, player_flag_up, player_flag_down
 
     if(keyboard.key_pressed("DOWN")):
-        if(player_y >= 50 and player_y < 450 and player_flag_move_down):
+        if(player_y >= 50 and player_y < 450 and player_flag_down):
             player_y += 200
-            player_flag_move_down = False
+            player_flag_down = False
     else:
-        player_flag_move_down = True
+        player_flag_down = True
 
     if(keyboard.key_pressed("UP")):
-        if(player_y > 50 and player_y <= 450 and player_flag_move_up):
+        if(player_y > 50 and player_y <= 450 and player_flag_up):
             player_y -= 200
-            player_flag_move_up = False
+            player_flag_up = False
     else:
-        player_flag_move_up = True
+        player_flag_up = True
 
     player.set_position(player_x, player_y)
+
+############
+###A Funcao player_change_color e a responsavel pela troca de cores do personagem.
+############
+def player_change_color():
+    global player_color, player_flag_space
+
+    if(keyboard.key_pressed("SPACE")):
+        if(player_flag_space):
+            player_flag_space = False
+
+            if(player_color == "RED"):
+                player_color = "GREEN"
+            elif(player_color == "GREEN"):
+                player_color = "BLUE"
+            elif(player_color == "BLUE"):
+                player_color = "RED"
+
+            print(player_color)
+    else:
+        player_flag_space = True
 
 ############
 ###A Funcao player_update e responsavel por aglomerar todas as funcoes do personagem com necessidade de loop.
 ############
 def player_update():
     player_move()
+    player_change_color()
     player.update()
 
 #############
