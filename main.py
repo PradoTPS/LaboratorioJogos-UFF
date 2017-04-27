@@ -7,8 +7,11 @@
 #endregion
 
 #region Libraries
+from random import randint
+
 from PPlay.window import  *
 from PPlay.sprite import *
+from PPlay.collision import *
 #endregion
 
 #region Variables
@@ -16,7 +19,7 @@ from PPlay.sprite import *
 canvas = Window(800,600)
 keyboard = Window.get_keyboard()
 
-player = Sprite("boy.png", 24)
+player = Sprite("Player.png", 24)
 player_x = 20
 player_y = 50
 player_color = "RED"
@@ -24,6 +27,9 @@ player_color = "RED"
 player_flag_down = True
 player_flag_up = True
 player_flag_space = True
+
+enemies = []
+enemies_flag_create = True
 #[END] Criando variaveis de jogo
 #endregion
 
@@ -32,10 +38,13 @@ player_flag_space = True
 ###A Funcao on_create e a primeira funcao de jogo, ela define parametros das instancias de classe.
 ############
 def on_create():
+    canvas.set_title("JOGO")
+
     player.set_position(player_x, player_y)
     player.set_sequence(0,8)
     player.set_total_duration(1600)
 
+#region Player's Functions
 ############
 ###A Funcao player_move e a responsavel pela movimentacao do personagem.
 ############
@@ -93,6 +102,57 @@ def player_update():
     player_move()
     player_change_color()
     player.update()
+#endregion
+
+#region Enemies' Functions
+############
+###A Funcao enemy_create e responsavel por criar os inimigos de forma ordenada.
+############
+def enemy_create():
+    global enemies_flag_create
+
+    if((canvas.time_elapsed() / 1000) % 2 == 0 and enemies_flag_create):     #Criando inimigos a cada 2 segundos
+        type = randint(1,3)                                                  #RED = 1, GREEN = 2 , BLUE = 3
+        enemy_image = {1 : "EnemyRed.png", 2 : "EnemyGreen.png", 3 : "EnemyBlue.png"}[type]
+
+        enemy = Sprite(enemy_image, 8)
+        enemy_setting(enemy)
+
+        enemies_flag_create = False
+
+    if((canvas.time_elapsed() / 1000) % 2 != 0 and not enemies_flag_create):
+        enemies_flag_create = True
+
+############
+###A Funcao enemy_setting recebe um inimigo para entregar seus comportamentos.
+############
+def enemy_setting(enemy):
+    layer = randint(0,2)                                                     #Layer 1 = 0, Layer 2 = 1, Layer 3 = 2
+    enemy_x = canvas.width
+    enemy_y = (200 * layer) + 50
+
+    enemy.set_position(enemy_x, enemy_y)
+    enemy.set_total_duration(500)
+
+    enemies.append(enemy)
+
+############
+###A Funcao enemy_update e responsavel por aglomerar todas as funcoes com necessidade de update de todos os inimigos.
+############
+def enemy_update():
+    enemy_create()
+
+    for enemy in enemies:
+        enemy.move_x(-250 * canvas.delta_time())
+        enemy.update()
+
+############
+###A Funcao enemy_draw e responsavel por aglomerar a funcao de desenho de todos os inimigos.
+############
+def enemy_draw():
+    for enemy in enemies:
+        enemy.draw()
+#endregion
 
 #############
 ###A Funcao update aglomera todas as funcoes gerais de update do jogo.
@@ -100,6 +160,7 @@ def player_update():
 def update():
     canvas.update()
     player_update()
+    enemy_update()
 
 ############
 ###A Funcao draw aglomera todas as funcoes gerais de desenho do jogo.
@@ -107,6 +168,7 @@ def update():
 def draw():
     canvas.set_background_color([255,255,255])
     player.draw()
+    enemy_draw()
 
 ############
 ###A funcao loop e responsavel pelo loop de jogo.
