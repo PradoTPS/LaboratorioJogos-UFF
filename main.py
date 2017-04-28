@@ -19,9 +19,11 @@ from PPlay.collision import *
 canvas = Window(800,600)
 keyboard = Window.get_keyboard()
 
+screen = "GAMEPLAY"
+
 player = Sprite("Player.png", 24)
 player_x = 20
-player_y = 50
+player_y = 250
 player_color = "RED"
 
 player_flag_down = True
@@ -29,6 +31,7 @@ player_flag_up = True
 player_flag_space = True
 
 enemies = []
+enemies_colors = []
 enemies_flag_create = True
 #[END] Criando variaveis de jogo
 #endregion
@@ -43,6 +46,22 @@ def on_create():
     player.set_position(player_x, player_y)
     player.set_sequence(0,8)
     player.set_total_duration(1600)
+
+############
+###A Funcao on_restart reinicia as variaveis necessarias para o gameplay.
+############
+def on_restart():
+    global player_x, player_y, player_color, enemies, enemies_colors
+
+    player_x = 20
+    player_y = 250
+    player_color = "RED"
+
+    enemies = []
+    enemies_colors = []
+
+    player.set_position(player_x, player_y)
+    player.set_sequence(0,8)
 
 #region Player's Functions
 ############
@@ -114,9 +133,10 @@ def enemy_create():
     if((canvas.time_elapsed() / 1000) % 2 == 0 and enemies_flag_create):     #Criando inimigos a cada 2 segundos
         type = randint(1,3)                                                  #RED = 1, GREEN = 2 , BLUE = 3
         enemy_image = {1 : "EnemyRed.png", 2 : "EnemyGreen.png", 3 : "EnemyBlue.png"}[type]
+        enemy_color = {"EnemyRed.png": "RED", "EnemyGreen.png": "GREEN", "EnemyBlue.png": "BLUE"}[enemy_image]
 
         enemy = Sprite(enemy_image, 8)
-        enemy_setting(enemy)
+        enemy_setting(enemy, enemy_color)
 
         enemies_flag_create = False
 
@@ -126,7 +146,7 @@ def enemy_create():
 ############
 ###A Funcao enemy_setting recebe um inimigo para entregar seus comportamentos.
 ############
-def enemy_setting(enemy):
+def enemy_setting(enemy, enemy_color):
     layer = randint(0,2)                                                     #Layer 1 = 0, Layer 2 = 1, Layer 3 = 2
     enemy_x = canvas.width
     enemy_y = (200 * layer) + 50
@@ -135,6 +155,25 @@ def enemy_setting(enemy):
     enemy.set_total_duration(500)
 
     enemies.append(enemy)
+    enemies_colors.append(enemy_color)
+
+############
+###A Funcao enemy_collision verifica as colisoes de todos os inimigos com o personagem e com o limite de destruicao.
+############
+def enemy_collision():
+    global screen
+
+    index = 0
+
+    for enemy in enemies:
+        if (Collision.collided(enemies[index], player)):    #Verifica se um inimigo de determinado indice
+            if (enemies_colors[index] == player_color):     #colidiu com o player. Se eles tem a mesma cor
+                enemies.pop(index)                          #o inimigo e destruido. Se eles tem cores diferente
+                enemies_colors.pop(index)                   #o jogo vai para a tela de GAMEOVER.
+            else:
+                screen = "GAMEOVER"
+
+        index = index + 1
 
 ############
 ###A Funcao enemy_update e responsavel por aglomerar todas as funcoes com necessidade de update de todos os inimigos.
@@ -144,6 +183,7 @@ def enemy_update():
 
     for enemy in enemies:
         enemy.move_x(-250 * canvas.delta_time())
+        enemy_collision()
         enemy.update()
 
 ############
@@ -155,20 +195,35 @@ def enemy_draw():
 #endregion
 
 #############
+###A Funcao check_gameover verifica se o status e GAMEOVER e reinicia o jogo.
+############
+def check_gameover():
+    global screen
+
+    if(screen == "GAMEOVER"):
+        on_restart()
+        screen = "GAMEPLAY"
+
+#############
 ###A Funcao update aglomera todas as funcoes gerais de update do jogo.
 ############
 def update():
     canvas.update()
-    player_update()
-    enemy_update()
+    check_gameover()
+
+    if(screen == "GAMEPLAY"):
+        player_update()
+        enemy_update()
 
 ############
 ###A Funcao draw aglomera todas as funcoes gerais de desenho do jogo.
 ############
 def draw():
     canvas.set_background_color([255,255,255])
-    player.draw()
-    enemy_draw()
+
+    if(screen == "GAMEPLAY"):
+        player.draw()
+        enemy_draw()
 
 ############
 ###A funcao loop e responsavel pelo loop de jogo.
