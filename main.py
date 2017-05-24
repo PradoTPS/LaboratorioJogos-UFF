@@ -25,11 +25,21 @@ screen = "GAMEPLAY"
 background = GameImage("resources/images/Background.png")
 background2 = GameImage("resources/images/Background.png")
 background_x = 0
-background2_x = 1600
+background2_x = 800
+
+clouds = GameImage("resources/images/Nuvens.png")
+clouds2 = GameImage("resources/images/Nuvens.png")
+clouds_x = 0
+clouds2_x = 800
+
+bush = GameImage("resources/images/Arbusto.png")
+bush2 = GameImage("resources/images/Arbusto.png")
+bush_x = 0
+bush2_x = 800
 
 player = Sprite("resources/images/Player.png", 24)
 player_x = 20
-player_y = 250
+player_y = 300
 player_color = "RED"
 
 player_flag_down = True
@@ -61,17 +71,23 @@ def on_create():
 ###A Funcao on_restart reinicia as variaveis necessarias para o gameplay.
 ############
 def on_restart():
-    global player_x, player_y, player_color, enemies, enemies_colors, background_x, background2_x
+    global player_x, player_y, player_color, enemies, enemies_colors, background_x, background2_x, clouds_x, clouds2_x, bush_x, bush2_x
 
     player_x = 20
-    player_y = 250
+    player_y = 300
     player_color = "RED"
 
     enemies = []
     enemies_colors = []
 
     background_x = 0
-    background2_x = 1600
+    background2_x = 800
+
+    clouds_x = 0
+    clouds2_x = 800
+
+    bush_x = 0
+    bush2_x = 800
 
     player.set_position(player_x, player_y)
     player.set_sequence(0,8)
@@ -88,15 +104,15 @@ def player_move():
     global player_x, player_y, player_flag_up, player_flag_down
 
     if(keyboard.key_pressed("DOWN")):
-        if(player_y >= 50 and player_y < 450 and player_flag_down):
-            player_y += 200
+        if(player_y >= 150 and player_y < 450 and player_flag_down):
+            player_y += 150
             player_flag_down = False
     else:
         player_flag_down = True
 
     if(keyboard.key_pressed("UP")):
-        if(player_y > 50 and player_y <= 450 and player_flag_up):
-            player_y -= 200
+        if(player_y > 150 and player_y <= 450 and player_flag_up):
+            player_y -= 150
             player_flag_up = False
     else:
         player_flag_up = True
@@ -169,7 +185,7 @@ def enemy_create():
 def enemy_setting(enemy, enemy_color):
     layer = randint(0,2)                                                     #Layer 1 = 0, Layer 2 = 1, Layer 3 = 2
     enemy_x = canvas.width
-    enemy_y = (200 * layer) + 50
+    enemy_y = (150 * layer) + 150
 
     enemy.set_position(enemy_x, enemy_y)
     enemy.set_total_duration(500)
@@ -231,21 +247,81 @@ def background_move():
     if(canvas_initial_time % 270 == 0):
         background2_x += -1
 
-    if(background_x <= -1600):
-            background_x = 1600
-    if(background2_x <= -1600):
-            background2_x = 1600
+    if(background_x <= -800):
+            background_x = 800
+    if(background2_x <= -800):
+            background2_x = 800
 
     background.set_position(background_x,0)
     background2.set_position(background2_x,0)
 
 
 ############
-###A Funcao background_draw aglomera todas as funcoes de desenho dos fundos.
+###A Funcao clouds_move e responsavel pela movimentacao das nuvens.
+############
+def clouds_move():
+    global canvas_initial_time, clouds_x, clouds2_x
+
+    if(canvas_initial_time % 270 == 0):
+        clouds_x += -0.5
+    if(canvas_initial_time % 270 == 0):
+        clouds2_x += -0.5
+
+    if(clouds_x <= -800):
+            clouds_x = 800
+    if(clouds2_x <= -800):
+            clouds2_x = 800
+
+    clouds.set_position(clouds_x,0)
+    clouds2.set_position(clouds2_x,0)
+
+
+############
+###A Funcao bush_move e responsavel pela movimentacao do arbusto.
+############
+def bush_move():
+    global canvas_initial_time, bush_x, bush2_x
+
+    if(canvas_initial_time % 270 == 0):
+        bush_x += -1.5
+    if(canvas_initial_time % 270 == 0):
+        bush2_x += -1.5
+
+    if(bush_x <= -800):
+            bush_x = 800
+    if(bush2_x <= -800):
+            bush2_x = 800
+
+    bush.set_position(bush_x,0)
+    bush2.set_position(bush2_x,0)
+
+
+############
+###A Funcao background_update aglomera todas as funcoes de movimentacao de todos os fundos.
+############
+def background_update():
+    clouds_move()
+    background_move()
+    bush_move()
+
+
+############
+###A Funcao bush_draw aglomera as funcoes de desenho dos arbustos.
+############
+def bush_draw():
+    bush.draw()
+    bush2.draw()
+
+
+############
+###A Funcao background_draw aglomera todas as funcoes de desenho de todos os fundos.
 ############
 def background_draw():
+    clouds.draw()
+    clouds2.draw()
+
     background.draw()
-    background2.draw()
+    background2.draw()       #A funcao de movimentacao do arbusto esta diretamente no update pra poder ficar em cima de tudo
 #endregion
 
 #region Score's Functions
@@ -305,7 +381,7 @@ def update():
     check_gameover()
 
     if(screen == "GAMEPLAY"):
-        background_move()
+        background_update()
         player_update()
         enemy_update()
 
@@ -323,6 +399,8 @@ def draw():
         score_draw()
         player.draw()
         enemy_draw()
+
+        bush_draw()      #O desenho do arbusto esta aqui para sobrepor todas as imagens
 
 
 ############
