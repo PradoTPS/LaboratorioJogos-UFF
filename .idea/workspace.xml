@@ -26,28 +26,8 @@
       <file leaf-file-name="main.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="49" column="12" selection-start="1266" selection-end="1266" vertical-scroll-proportion="0.5361596" vertical-offset="1" max-vertical-offset="1584">
-              <folding>
-                <element signature="n#!!doc" expanded="false" />
-                <element signature="e#416#433#0" expanded="false" />
-                <element signature="e#434#460#0" expanded="true" />
-                <element signature="e#559#576#0" expanded="false" />
-                <element signature="e#1118#1252#0" expanded="false" />
-                <element signature="e#1376#1619#0" expanded="false" />
-                <element signature="e#1770#2294#0" expanded="false" />
-                <element signature="e#2436#3227#0" expanded="false" />
-                <element signature="e#3388#3447#0" expanded="false" />
-                <element signature="e#3617#4302#0" expanded="false" />
-                <element signature="e#4450#4763#0" expanded="false" />
-                <element signature="e#4935#5495#0" expanded="false" />
-                <element signature="e#5663#5804#0" expanded="false" />
-                <element signature="e#5945#5988#0" expanded="false" />
-                <element signature="e#6131#6226#0" expanded="false" />
-                <element signature="e#6342#6458#0" expanded="false" />
-                <element signature="e#6570#6688#0" expanded="false" />
-                <element signature="e#6780#6825#0" expanded="false" />
-                <element signature="e#6837#6862#0" expanded="false" />
-              </folding>
+            <state line="145" column="12" selection-start="3912" selection-end="3912" vertical-scroll-proportion="0.3943299" vertical-offset="2227" max-vertical-offset="5814">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -63,6 +43,7 @@
     <option name="changedFiles">
       <list>
         <option value="$PROJECT_DIR$/teste.py" />
+        <option value="$PROJECT_DIR$/other.py" />
         <option value="$PROJECT_DIR$/main.py" />
       </list>
     </option>
@@ -108,18 +89,29 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="LaboratorioJogos-UFF" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="LaboratorioJogos-UFF" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="recentsLimit" value="5" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Exemplos" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="FullScreen" value="false" />
     <property name="options.lastSelected" value="editor.preferences.appearance" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
+    <property name="restartRequiresConfirmation" value="true" />
   </component>
   <component name="PyConsoleOptionsProvider">
     <option name="myPythonConsoleState">
@@ -127,24 +119,6 @@
     </option>
   </component>
   <component name="RunManager" selected="Python.main">
-    <configuration default="false" name="teste" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="Teste" />
-      <option name="SCRIPT_NAME" value="C:\Users\Thiago\Desktop\Teste\main.py" />
-      <option name="PARAMETERS" value="" />
-      <RunnerSettings RunnerId="PythonRunner" />
-      <ConfigurationWrapper RunnerId="PythonRunner" />
-      <method />
-    </configuration>
     <configuration default="false" name="main" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -284,14 +258,12 @@
       <option name="USE_PATTERN" value="false" />
       <method />
     </configuration>
-    <list size="2">
-      <item index="0" class="java.lang.String" itemvalue="Python.teste" />
-      <item index="1" class="java.lang.String" itemvalue="Python.main" />
+    <list size="1">
+      <item index="0" class="java.lang.String" itemvalue="Python.main" />
     </list>
     <recent_temporary>
-      <list size="2">
+      <list size="1">
         <item index="0" class="java.lang.String" itemvalue="Python.main" />
-        <item index="1" class="java.lang.String" itemvalue="Python.teste" />
       </list>
     </recent_temporary>
   </component>
@@ -305,7 +277,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1376" height="744" extended-state="0" />
+    <frame x="-8" y="-8" width="1376" height="744" extended-state="6" />
     <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -320,11 +292,11 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -348,136 +320,57 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
+        <state line="49" column="12" selection-start="1266" selection-end="1266" vertical-scroll-proportion="0.0" vertical-offset="833" max-vertical-offset="4199">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="49" column="12" selection-start="1266" selection-end="1266" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1496">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.py">
+      <provider selected="true" editor-type-id="text-editor">
         <state line="186" column="0" selection-start="5606" selection-end="5606" vertical-scroll-proportion="0.0" vertical-offset="3132" max-vertical-offset="4014">
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-            <element signature="e#416#433#0" expanded="false" />
-            <element signature="e#434#460#0" expanded="true" />
-            <element signature="e#559#576#0" expanded="false" />
-            <element signature="e#1118#1252#0" expanded="false" />
-            <element signature="e#1376#1619#0" expanded="false" />
-            <element signature="e#1770#2294#0" expanded="false" />
-            <element signature="e#2436#3227#0" expanded="false" />
-            <element signature="e#3388#3447#0" expanded="false" />
-            <element signature="e#3617#4302#0" expanded="false" />
-            <element signature="e#4450#4763#0" expanded="false" />
-            <element signature="e#4935#5495#0" expanded="false" />
-            <element signature="e#5663#5804#0" expanded="false" />
-            <element signature="e#5945#5988#0" expanded="false" />
-            <element signature="e#6131#6226#0" expanded="false" />
-            <element signature="e#6342#6458#0" expanded="false" />
-            <element signature="e#6570#6688#0" expanded="false" />
-            <element signature="e#6780#6825#0" expanded="false" />
-            <element signature="e#6837#6862#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="94" column="0" selection-start="2675" selection-end="2675" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="882">
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-            <element signature="e#416#433#0" expanded="false" />
-            <element signature="e#434#460#0" expanded="true" />
-            <element signature="e#559#576#0" expanded="false" />
-            <element signature="e#1118#1252#0" expanded="false" />
-            <element signature="e#1376#1619#0" expanded="false" />
-            <element signature="e#1770#2294#0" expanded="false" />
-            <element signature="e#2436#3227#0" expanded="false" />
-            <element signature="e#3388#3447#0" expanded="false" />
-            <element signature="e#3617#4302#0" expanded="false" />
-            <element signature="e#4450#4763#0" expanded="false" />
-            <element signature="e#4935#5495#0" expanded="false" />
-            <element signature="e#5663#5804#0" expanded="false" />
-            <element signature="e#5945#5988#0" expanded="false" />
-            <element signature="e#6131#6226#0" expanded="false" />
-            <element signature="e#6342#6458#0" expanded="false" />
-            <element signature="e#6570#6688#0" expanded="false" />
-            <element signature="e#6780#6825#0" expanded="false" />
-            <element signature="e#6837#6862#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="28" column="27" selection-start="830" selection-end="830" vertical-scroll-proportion="0.0" vertical-offset="486" max-vertical-offset="1728">
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-            <element signature="e#416#433#0" expanded="false" />
-            <element signature="e#434#460#0" expanded="true" />
-            <element signature="e#559#576#0" expanded="false" />
-            <element signature="e#1118#1252#0" expanded="false" />
-            <element signature="e#1376#1619#0" expanded="false" />
-            <element signature="e#1770#2294#0" expanded="false" />
-            <element signature="e#2436#3227#0" expanded="false" />
-            <element signature="e#3388#3447#0" expanded="false" />
-            <element signature="e#3617#4302#0" expanded="false" />
-            <element signature="e#4450#4763#0" expanded="false" />
-            <element signature="e#4935#5495#0" expanded="false" />
-            <element signature="e#5663#5804#0" expanded="false" />
-            <element signature="e#5945#5988#0" expanded="false" />
-            <element signature="e#6131#6226#0" expanded="false" />
-            <element signature="e#6342#6458#0" expanded="false" />
-            <element signature="e#6570#6688#0" expanded="false" />
-            <element signature="e#6780#6825#0" expanded="false" />
-            <element signature="e#6837#6862#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="28" column="27" selection-start="760" selection-end="760" vertical-scroll-proportion="0.0" vertical-offset="459" max-vertical-offset="986">
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-            <element signature="e#416#433#0" expanded="false" />
-            <element signature="e#434#460#0" expanded="true" />
-            <element signature="e#559#576#0" expanded="false" />
-            <element signature="e#1118#1252#0" expanded="false" />
-            <element signature="e#1376#1619#0" expanded="false" />
-            <element signature="e#1770#2294#0" expanded="false" />
-            <element signature="e#2436#3227#0" expanded="false" />
-            <element signature="e#3388#3447#0" expanded="false" />
-            <element signature="e#3617#4302#0" expanded="false" />
-            <element signature="e#4450#4763#0" expanded="false" />
-            <element signature="e#4935#5495#0" expanded="false" />
-            <element signature="e#5663#5804#0" expanded="false" />
-            <element signature="e#5945#5988#0" expanded="false" />
-            <element signature="e#6131#6226#0" expanded="false" />
-            <element signature="e#6342#6458#0" expanded="false" />
-            <element signature="e#6570#6688#0" expanded="false" />
-            <element signature="e#6780#6825#0" expanded="false" />
-            <element signature="e#6837#6862#0" expanded="false" />
-          </folding>
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1615">
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="49" column="12" selection-start="1266" selection-end="1266" vertical-scroll-proportion="0.5361596" vertical-offset="1" max-vertical-offset="1584">
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-            <element signature="e#416#433#0" expanded="false" />
-            <element signature="e#434#460#0" expanded="true" />
-            <element signature="e#559#576#0" expanded="false" />
-            <element signature="e#1118#1252#0" expanded="false" />
-            <element signature="e#1376#1619#0" expanded="false" />
-            <element signature="e#1770#2294#0" expanded="false" />
-            <element signature="e#2436#3227#0" expanded="false" />
-            <element signature="e#3388#3447#0" expanded="false" />
-            <element signature="e#3617#4302#0" expanded="false" />
-            <element signature="e#4450#4763#0" expanded="false" />
-            <element signature="e#4935#5495#0" expanded="false" />
-            <element signature="e#5663#5804#0" expanded="false" />
-            <element signature="e#5945#5988#0" expanded="false" />
-            <element signature="e#6131#6226#0" expanded="false" />
-            <element signature="e#6342#6458#0" expanded="false" />
-            <element signature="e#6570#6688#0" expanded="false" />
-            <element signature="e#6780#6825#0" expanded="false" />
-            <element signature="e#6837#6862#0" expanded="false" />
-          </folding>
+        <state line="145" column="12" selection-start="3912" selection-end="3912" vertical-scroll-proportion="0.3943299" vertical-offset="2227" max-vertical-offset="5814">
+          <folding />
         </state>
       </provider>
     </entry>

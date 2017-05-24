@@ -9,19 +9,25 @@
 #region Libraries
 from random import randint
 
-from PPlay.window import  *
+from PPlay.window import *
 from PPlay.sprite import *
 from PPlay.collision import *
+from PPlay.gameimage import *
 #endregion
 
 #region Variables
-#[START] Criando variaveis de jogo
 canvas = Window(800,600)
+canvas_initial_time = canvas.delta_time()
 keyboard = Window.get_keyboard()
 
 screen = "GAMEPLAY"
 
-player = Sprite("Player.png", 24)
+background = GameImage("resources/images/Background.png")
+background2 = GameImage("resources/images/Background.png")
+background_x = 0
+background2_x = 1600
+
+player = Sprite("resources/images/Player.png", 24)
 player_x = 20
 player_y = 250
 player_color = "RED"
@@ -33,11 +39,14 @@ player_flag_space = True
 enemies = []
 enemies_colors = []
 enemies_flag_create = True
-#[END] Criando variaveis de jogo
+
+score = 0
+score_streak = 1
 #endregion
 
 #region Functions
-############
+#region Moment Functions
+#############
 ###A Funcao on_create e a primeira funcao de jogo, ela define parametros das instancias de classe.
 ############
 def on_create():
@@ -47,11 +56,12 @@ def on_create():
     player.set_sequence(0,8)
     player.set_total_duration(1600)
 
+
 ############
 ###A Funcao on_restart reinicia as variaveis necessarias para o gameplay.
 ############
 def on_restart():
-    global player_x, player_y, player_color, enemies, enemies_colors
+    global player_x, player_y, player_color, enemies, enemies_colors, background_x, background2_x
 
     player_x = 20
     player_y = 250
@@ -60,8 +70,15 @@ def on_restart():
     enemies = []
     enemies_colors = []
 
+    background_x = 0
+    background2_x = 1600
+
     player.set_position(player_x, player_y)
     player.set_sequence(0,8)
+
+    background.set_position(background_x, 0)
+    background2.set_position(background2_x, 0)
+#endregion
 
 #region Player's Functions
 ############
@@ -85,6 +102,7 @@ def player_move():
         player_flag_up = True
 
     player.set_position(player_x, player_y)
+
 
 ############
 ###A Funcao player_change_color e a responsavel pela troca de cores do personagem.
@@ -114,6 +132,7 @@ def player_change_color():
     else:
         player_flag_space = True
 
+
 ############
 ###A Funcao player_update e responsavel por aglomerar todas as funcoes do personagem com necessidade de loop.
 ############
@@ -135,13 +154,14 @@ def enemy_create():
         enemy_image = {1 : "EnemyRed.png", 2 : "EnemyGreen.png", 3 : "EnemyBlue.png"}[type]
         enemy_color = {"EnemyRed.png": "RED", "EnemyGreen.png": "GREEN", "EnemyBlue.png": "BLUE"}[enemy_image]
 
-        enemy = Sprite(enemy_image, 8)
+        enemy = Sprite("resources/images/" + enemy_image, 8)
         enemy_setting(enemy, enemy_color)
 
         enemies_flag_create = False
 
     if((canvas.time_elapsed() / 1000) % 2 != 0 and not enemies_flag_create):
         enemies_flag_create = True
+
 
 ############
 ###A Funcao enemy_setting recebe um inimigo para entregar seus comportamentos.
@@ -157,11 +177,12 @@ def enemy_setting(enemy, enemy_color):
     enemies.append(enemy)
     enemies_colors.append(enemy_color)
 
+
 ############
 ###A Funcao enemy_collision verifica as colisoes de todos os inimigos com o personagem e com o limite de destruicao.
 ############
 def enemy_collision():
-    global screen
+    global screen, score, score_streak
 
     index = 0
 
@@ -170,10 +191,13 @@ def enemy_collision():
             if (enemies_colors[index] == player_color):     #colidiu com o player. Se eles tem a mesma cor
                 enemies.pop(index)                          #o inimigo e destruido. Se eles tem cores diferente
                 enemies_colors.pop(index)                   #o jogo vai para a tela de GAMEOVER.
+
+                score_add()
             else:
                 screen = "GAMEOVER"
 
         index = index + 1
+
 
 ############
 ###A Funcao enemy_update e responsavel por aglomerar todas as funcoes com necessidade de update de todos os inimigos.
@@ -186,6 +210,7 @@ def enemy_update():
         enemy_collision()
         enemy.update()
 
+
 ############
 ###A Funcao enemy_draw e responsavel por aglomerar a funcao de desenho de todos os inimigos.
 ############
@@ -194,6 +219,72 @@ def enemy_draw():
         enemy.draw()
 #endregion
 
+#region Background's Functions
+############
+###A Funcao background_move e responsavel pela movimentacao dos fundos.
+############
+def background_move():
+    global canvas_initial_time, background_x, background2_x
+
+    if(canvas_initial_time % 270 == 0):
+        background_x += -1
+    if(canvas_initial_time % 270 == 0):
+        background2_x += -1
+
+    if(background_x <= -1600):
+            background_x = 1600
+    if(background2_x <= -1600):
+            background2_x = 1600
+
+    background.set_position(background_x,0)
+    background2.set_position(background2_x,0)
+
+
+############
+###A Funcao background_draw aglomera todas as funcoes de desenho dos fundos.
+############
+def background_draw():
+    background.draw()
+    background2.draw()
+#endregion
+
+#region Score's Functions
+############
+###A Funcao score_update e responsavel por aumentar os valores de score e score_streak.
+############
+def score_add():
+    global score, score_streak
+
+    if(score == 0):
+        score = 1
+    else:
+        score = score + score_streak
+
+    score_streak = score_streak + 1
+
+
+############
+###A Funcao score_update e responsavel por reiniciar os valores de score e score_streak.
+############
+def score_update():
+    global score, score_streak
+
+    if(screen == "GAMEOVER"):
+        score = 0
+        score_streak = 1
+
+
+############
+###A Funcao score_draw e responsavel por desenhar a pontuacao na tela.
+############
+def score_draw ():
+    canvas.draw_text("Pontos: %s" % (score), 20, 20, size = 20, color = (0,0,0), font_name = "Arial", bold = True, italic = False)
+
+    if (score != 0):
+        canvas.draw_text("+%s" % (1 * score_streak), 20, 50, size = 20, color = (0,0,0), font_name = "Arial", bold = True, italic = False)
+#endregion
+
+#region Utility Functions
 #############
 ###A Funcao check_gameover verifica se o status e GAMEOVER e reinicia o jogo.
 ############
@@ -203,7 +294,9 @@ def check_gameover():
     if(screen == "GAMEOVER"):
         on_restart()
         screen = "GAMEPLAY"
+#endregion
 
+#region Structure Functions
 #############
 ###A Funcao update aglomera todas as funcoes gerais de update do jogo.
 ############
@@ -212,8 +305,12 @@ def update():
     check_gameover()
 
     if(screen == "GAMEPLAY"):
+        background_move()
         player_update()
         enemy_update()
+
+    score_update()
+
 
 ############
 ###A Funcao draw aglomera todas as funcoes gerais de desenho do jogo.
@@ -222,8 +319,11 @@ def draw():
     canvas.set_background_color([255,255,255])
 
     if(screen == "GAMEPLAY"):
+        background_draw()
+        score_draw()
         player.draw()
         enemy_draw()
+
 
 ############
 ###A funcao loop e responsavel pelo loop de jogo.
@@ -233,10 +333,9 @@ def loop():
         draw()
         update()
 #endregion
+#endregion
 
 #region Calling Functions
-#[START] Chamando funcoes de criacao e loop
 on_create()
 loop()
-#[END] Chamando funcoes de criacao e loop
 #endregion
