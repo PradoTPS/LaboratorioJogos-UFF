@@ -20,7 +20,23 @@ canvas = Window(800,600)
 canvas_initial_time = canvas.delta_time()
 keyboard = Window.get_keyboard()
 
-screen = "GAMEPLAY"
+screen = "MENU"
+current_button = "PLAY"
+
+button_play = GameImage("resources/images/Play.png")
+button_play_x = canvas.width / 2 - button_play.width / 2
+button_play_y = canvas.height / 2 + button_play.height / 2
+
+button_options = GameImage("resources/images/Options.png")
+button_options_x = ((canvas.width / 2 - button_options.width / 2) - button_options.width / 2) - 30
+button_options_y = (canvas.height / 2 + button_play.height / 2) + button_options.height + 10
+
+button_credits = GameImage("resources/images/Credits.png")
+button_credits_x = ((canvas.width / 2 - button_credits.width / 2) + button_credits.width / 2) + 30
+button_credits_y = (canvas.height / 2 + button_play.height / 2) + button_credits.height + 10
+
+score = 0
+score_streak = 1
 
 background = GameImage("resources/images/Background.png")
 background2 = GameImage("resources/images/Background.png")
@@ -49,9 +65,6 @@ player_flag_space = True
 enemies = []
 enemies_colors = []
 enemies_flag_create = True
-
-score = 0
-score_streak = 1
 #endregion
 
 #region Functions
@@ -60,11 +73,15 @@ score_streak = 1
 ###A Funcao on_create e a primeira funcao de jogo, ela define parametros das instancias de classe.
 ############
 def on_create():
-    canvas.set_title("JOGO")
+    canvas.set_title("Color Enchantment")
 
     player.set_position(player_x, player_y)
     player.set_sequence(0,8)
     player.set_total_duration(1600)
+
+    button_play.set_position(button_play_x, button_play_y)
+    button_options.set_position(button_options_x, button_options_y)
+    button_credits.set_position(button_credits_x, button_credits_y)
 
 
 ############
@@ -360,6 +377,16 @@ def score_draw ():
         canvas.draw_text("+%s" % (1 * score_streak), 20, 50, size = 20, color = (0,0,0), font_name = "Arial", bold = True, italic = False)
 #endregion
 
+#region Buttons' Functions
+############
+###A Funcao button_draw aglomera todas as funcoes de desenho de todos os botoes.
+############
+def button_draw():
+    button_play.draw()
+    button_options.draw()
+    button_credits.draw()
+#endregion
+
 #region Utility Functions
 #############
 ###A Funcao check_gameover verifica se o status e GAMEOVER e reinicia o jogo.
@@ -370,6 +397,44 @@ def check_gameover():
     if(screen == "GAMEOVER"):
         on_restart()
         screen = "GAMEPLAY"
+
+
+#############
+###A Funcao navigate e responsavel pela navegacao no menu principal.
+############
+def navigate():
+    global current_button, screen
+
+    if(keyboard.key_pressed("DOWN") and current_button == "PLAY"):
+        current_button = "OPTIONS"
+    elif(keyboard.key_pressed("RIGHT") and current_button == "OPTIONS"):
+        current_button = "CREDITS"
+    elif(keyboard.key_pressed("LEFT") and current_button == "CREDITS"):
+        current_button = "OPTIONS"
+    elif(keyboard.key_pressed("UP") and current_button == "OPTIONS"):
+        current_button = "PLAY"
+    elif(keyboard.key_pressed("UP") and current_button == "CREDITS"):
+        current_button = "PLAY"
+
+    if(keyboard.key_pressed("ENTER") or keyboard.key_pressed("SPACE")):
+        if(current_button == "PLAY"):
+            screen = "GAMEPLAY"
+        if(current_button == "BACK"):
+            screen = "MENU"
+            current_button = "PLAY"
+        if(current_button == "OPTIONS"):
+            screen = "OPTIONS"
+        if(current_button == "CREDITS"):
+            screen = "CREDITS"
+
+    if(screen == "GAMEPLAY"):
+        current_button = "PLAY"
+
+    if(screen == "CREDITS" or screen == "OPTIONS"):
+        current_button = "BACK"
+
+    print(current_button)
+    print(screen)
 #endregion
 
 #region Structure Functions
@@ -378,10 +443,12 @@ def check_gameover():
 ############
 def update():
     canvas.update()
+    navigate()
     check_gameover()
 
+    background_update()
+
     if(screen == "GAMEPLAY"):
-        background_update()
         player_update()
         enemy_update()
 
@@ -394,13 +461,16 @@ def update():
 def draw():
     canvas.set_background_color([255,255,255])
 
+    background_draw()
+    if(screen == "MENU"):
+        button_draw()
+
     if(screen == "GAMEPLAY"):
-        background_draw()
         score_draw()
         player.draw()
         enemy_draw()
 
-        bush_draw()      #O desenho do arbusto esta aqui para sobrepor todas as imagens
+    bush_draw()      #O desenho do arbusto esta aqui para sobrepor todas as imagens
 
 
 ############
