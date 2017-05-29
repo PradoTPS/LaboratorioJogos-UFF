@@ -17,7 +17,6 @@ from PPlay.gameimage import *
 
 #region Variables
 canvas = Window(800,600)
-canvas_initial_time = canvas.delta_time()
 keyboard = Window.get_keyboard()
 
 screen = "MENU"
@@ -257,17 +256,17 @@ def enemy_draw():
 ###A Funcao background_move e responsavel pela movimentacao dos fundos.
 ############
 def background_move():
-    global canvas_initial_time, background_x, background2_x
+    global background_x, background2_x
 
-    if(canvas_initial_time % 270 == 0):
-        background_x += -1
-    if(canvas_initial_time % 270 == 0):
-        background2_x += -1
+    background_x += -200 * canvas.delta_time()
+    background2_x += -200 * canvas.delta_time()
 
     if(background_x <= -800):
-            background_x = 800
+        background_x = 800
+        background2_x = 0
     if(background2_x <= -800):
-            background2_x = 800
+        background2_x = 800
+        background_x = 0
 
     background.set_position(background_x,0)
     background2.set_position(background2_x,0)
@@ -277,17 +276,17 @@ def background_move():
 ###A Funcao clouds_move e responsavel pela movimentacao das nuvens.
 ############
 def clouds_move():
-    global canvas_initial_time, clouds_x, clouds2_x
+    global clouds_x, clouds2_x
 
-    if(canvas_initial_time % 270 == 0):
-        clouds_x += -0.5
-    if(canvas_initial_time % 270 == 0):
-        clouds2_x += -0.5
+    clouds_x += -100 * canvas.delta_time()
+    clouds2_x += -100 * canvas.delta_time()
 
     if(clouds_x <= -800):
-            clouds_x = 800
+        clouds_x = 800
+        clouds2_x = 0
     if(clouds2_x <= -800):
-            clouds2_x = 800
+        clouds2_x = 800
+        clouds_x = 0
 
     clouds.set_position(clouds_x,0)
     clouds2.set_position(clouds2_x,0)
@@ -297,17 +296,17 @@ def clouds_move():
 ###A Funcao bush_move e responsavel pela movimentacao do arbusto.
 ############
 def bush_move():
-    global canvas_initial_time, bush_x, bush2_x
+    global bush_x, bush2_x
 
-    if(canvas_initial_time % 270 == 0):
-        bush_x += -1.5
-    if(canvas_initial_time % 270 == 0):
-        bush2_x += -1.5
+    bush_x += -300 * canvas.delta_time()
+    bush2_x += -300 * canvas.delta_time()
 
     if(bush_x <= -800):
-            bush_x = 800
+        bush_x = 800
+        bush2_x = 0
     if(bush2_x <= -800):
-            bush2_x = 800
+        bush2_x = 800
+        bush_x = 0
 
     bush.set_position(bush_x,0)
     bush2.set_position(bush2_x,0)
@@ -396,7 +395,7 @@ def check_gameover():
 
     if(screen == "GAMEOVER"):
         on_restart()
-        screen = "GAMEPLAY"
+        screen = "MENU"
 
 
 #############
@@ -419,22 +418,20 @@ def navigate():
     if(keyboard.key_pressed("ENTER") or keyboard.key_pressed("SPACE")):
         if(current_button == "PLAY"):
             screen = "GAMEPLAY"
-        if(current_button == "BACK"):
-            screen = "MENU"
-            current_button = "PLAY"
         if(current_button == "OPTIONS"):
             screen = "OPTIONS"
         if(current_button == "CREDITS"):
             screen = "CREDITS"
 
+    if(keyboard.key_pressed("ESC")):
+        if(current_button == "BACK"):
+            screen = "MENU"
+            current_button = "PLAY"
+
     if(screen == "GAMEPLAY"):
         current_button = "PLAY"
-
     if(screen == "CREDITS" or screen == "OPTIONS"):
         current_button = "BACK"
-
-    print(current_button)
-    print(screen)
 #endregion
 
 #region Structure Functions
