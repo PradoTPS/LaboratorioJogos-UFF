@@ -148,11 +148,11 @@ def player_change_color():
             temp_curr_frame = player.get_curr_frame()
 
             if(player_color == "RED"):
-                player_color = "GREEN"
+                player_color = "YELLOW"
                 player.set_sequence(9,16)
                 player.set_curr_frame(temp_curr_frame + 8)
 
-            elif(player_color == "GREEN"):
+            elif(player_color == "YELLOW"):
                 player_color = "BLUE"
                 player.set_sequence(17,24)
                 player.set_curr_frame(temp_curr_frame + 8)
@@ -183,10 +183,10 @@ def enemy_create():
 
     if((canvas.time_elapsed() / 1000) % 2 == 0 and enemies_flag_create):     #Criando inimigos a cada 2 segundos
         type = randint(1,3)                                                  #RED = 1, GREEN = 2 , BLUE = 3
-        enemy_image = {1 : "EnemyRed.png", 2 : "EnemyGreen.png", 3 : "EnemyBlue.png"}[type]
-        enemy_color = {"EnemyRed.png": "RED", "EnemyGreen.png": "GREEN", "EnemyBlue.png": "BLUE"}[enemy_image]
+        enemy_image = {1 : "EnemyRed.png", 2 : "EnemyYellow.png", 3 : "EnemyBlue.png"}[type]
+        enemy_color = {"EnemyRed.png": "RED", "EnemyYellow.png": "YELLOW", "EnemyBlue.png": "BLUE"}[enemy_image]
 
-        enemy = Sprite("resources/images/" + enemy_image, 8)
+        enemy = Sprite("resources/images/" + enemy_image, 4)
         enemy_setting(enemy, enemy_color)
 
         enemies_flag_create = False
@@ -201,7 +201,7 @@ def enemy_create():
 def enemy_setting(enemy, enemy_color):
     layer = randint(0,2)                                                     #Layer 1 = 0, Layer 2 = 1, Layer 3 = 2
     enemy_x = canvas.width
-    enemy_y = (150 * layer) + 150
+    enemy_y = (150 * layer) + 190
 
     enemy.set_position(enemy_x, enemy_y)
     enemy.set_total_duration(500)
