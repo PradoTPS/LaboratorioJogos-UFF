@@ -37,6 +37,8 @@ button_credits_y = (canvas.height / 2 + button_play.height / 2) + button_credits
 score = 0
 score_streak = 1
 
+logo = GameImage("resources/images/Logo.png")
+
 background = GameImage("resources/images/Background.png")
 background2 = GameImage("resources/images/Background.png")
 background_x = 0
@@ -337,7 +339,9 @@ def background_draw():
     clouds2.draw()
 
     background.draw()
-    background2.draw()       #A funcao de movimentacao do arbusto esta diretamente no update pra poder ficar em cima de tudo
+    background2.draw()
+
+    logo.draw()     #A funcao de movimentacao do arbusto esta diretamente no update pra poder ficar em cima de tudo
 #endregion
 
 #region Score's Functions
