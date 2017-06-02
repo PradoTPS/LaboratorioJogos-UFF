@@ -339,9 +339,7 @@ def background_draw():
     clouds2.draw()
 
     background.draw()
-    background2.draw()
-
-    logo.draw()     #A funcao de movimentacao do arbusto esta diretamente no update pra poder ficar em cima de tudo
+    background2.draw()     #A funcao de movimentacao do arbusto esta diretamente no update pra poder ficar em cima de tudo
 #endregion
 
 #region Score's Functions
@@ -407,25 +405,25 @@ def check_gameover():
 ############
 def navigate():
     global current_button, screen
+    if(screen == "MENU"):
+        if(keyboard.key_pressed("DOWN") and current_button == "PLAY"):
+            current_button = "OPTIONS"
+        elif(keyboard.key_pressed("RIGHT") and current_button == "OPTIONS"):
+            current_button = "CREDITS"
+        elif(keyboard.key_pressed("LEFT") and current_button == "CREDITS"):
+            current_button = "OPTIONS"
+        elif(keyboard.key_pressed("UP") and current_button == "OPTIONS"):
+            current_button = "PLAY"
+        elif(keyboard.key_pressed("UP") and current_button == "CREDITS"):
+            current_button = "PLAY"
 
-    if(keyboard.key_pressed("DOWN") and current_button == "PLAY"):
-        current_button = "OPTIONS"
-    elif(keyboard.key_pressed("RIGHT") and current_button == "OPTIONS"):
-        current_button = "CREDITS"
-    elif(keyboard.key_pressed("LEFT") and current_button == "CREDITS"):
-        current_button = "OPTIONS"
-    elif(keyboard.key_pressed("UP") and current_button == "OPTIONS"):
-        current_button = "PLAY"
-    elif(keyboard.key_pressed("UP") and current_button == "CREDITS"):
-        current_button = "PLAY"
-
-    if(keyboard.key_pressed("ENTER") or keyboard.key_pressed("SPACE")):
-        if(current_button == "PLAY"):
-            screen = "GAMEPLAY"
-        if(current_button == "OPTIONS"):
-            screen = "OPTIONS"
-        if(current_button == "CREDITS"):
-            screen = "CREDITS"
+        if(keyboard.key_pressed("ENTER") or keyboard.key_pressed("SPACE")):
+            if(current_button == "PLAY"):
+                screen = "GAMEPLAY"
+            if(current_button == "OPTIONS"):
+                screen = "OPTIONS"
+            if(current_button == "CREDITS"):
+                screen = "CREDITS"
 
     if(keyboard.key_pressed("ESC")):
         if(current_button == "BACK"):
@@ -465,6 +463,7 @@ def draw():
     background_draw()
     if(screen == "MENU"):
         button_draw()
+        logo.draw()
 
     if(screen == "GAMEPLAY"):
         score_draw()
