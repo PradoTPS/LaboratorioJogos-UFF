@@ -54,9 +54,9 @@ bush2 = GameImage("resources/images/Arbusto.png")
 bush_x = 0
 bush2_x = 800
 
-player = Sprite("resources/images/Player.png", 24)
+player = Sprite("resources/images/Player.png", 12)
 player_x = 20
-player_y = 300
+player_y = 280
 player_color = "RED"
 
 player_flag_down = True
@@ -77,7 +77,7 @@ def on_create():
     canvas.set_title("Color Enchantment")
 
     player.set_position(player_x, player_y)
-    player.set_sequence(0,8)
+    player.set_sequence(0,4)
     player.set_total_duration(1600)
 
     button_play.set_position(button_play_x, button_play_y)
@@ -92,7 +92,7 @@ def on_restart():
     global player_x, player_y, player_color, enemies, enemies_colors, background_x, background2_x, clouds_x, clouds2_x, bush_x, bush2_x
 
     player_x = 20
-    player_y = 300
+    player_y = 280
     player_color = "RED"
 
     enemies = []
@@ -122,14 +122,14 @@ def player_move():
     global player_x, player_y, player_flag_up, player_flag_down
 
     if(keyboard.key_pressed("DOWN")):
-        if(player_y >= 150 and player_y < 450 and player_flag_down):
+        if(player_y >= 130 and player_y < 470 and player_flag_down):
             player_y += 150
             player_flag_down = False
     else:
         player_flag_down = True
 
     if(keyboard.key_pressed("UP")):
-        if(player_y > 150 and player_y <= 450 and player_flag_up):
+        if(player_y > 130 and player_y <= 470 and player_flag_up):
             player_y -= 150
             player_flag_up = False
     else:
@@ -151,18 +151,18 @@ def player_change_color():
 
             if(player_color == "RED"):
                 player_color = "YELLOW"
-                player.set_sequence(9,16)
-                player.set_curr_frame(temp_curr_frame + 8)
+                player.set_sequence(5, 8)
+                player.set_curr_frame(temp_curr_frame + 4)
 
             elif(player_color == "YELLOW"):
                 player_color = "BLUE"
-                player.set_sequence(17,24)
-                player.set_curr_frame(temp_curr_frame + 8)
+                player.set_sequence(9, 12)
+                player.set_curr_frame(temp_curr_frame + 4)
 
             elif(player_color == "BLUE"):
                 player_color = "RED"
-                player.set_sequence(0,8)
-                player.set_curr_frame(temp_curr_frame - 16)
+                player.set_sequence(0, 4)
+                player.set_curr_frame(temp_curr_frame - 8)
     else:
         player_flag_space = True
 
@@ -203,7 +203,7 @@ def enemy_create():
 def enemy_setting(enemy, enemy_color):
     layer = randint(0,2)                                                     #Layer 1 = 0, Layer 2 = 1, Layer 3 = 2
     enemy_x = canvas.width
-    enemy_y = (150 * layer) + 190
+    enemy_y = (150 * layer) + 130
 
     enemy.set_position(enemy_x, enemy_y)
     enemy.set_total_duration(500)
